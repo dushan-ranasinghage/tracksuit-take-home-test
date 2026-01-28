@@ -10,7 +10,7 @@ type AddInsightProps = ModalProps & {
 };
 
 export const AddInsight = (props: AddInsightProps) => {
-  const { brand, text, setBrand, setText, handleSubmit } = useAddInsight({
+  const { brand, text, errors, setBrand, setText, handleSubmit } = useAddInsight({
     onClose: props.onClose,
     onInsightAdded: props.onInsightAdded,
   });
@@ -20,23 +20,27 @@ export const AddInsight = (props: AddInsightProps) => {
       <h1 className={styles.heading}>Add a new insight</h1>
       <form className={styles.form} onSubmit={handleSubmit}>
         <label className={styles.field}>
+          Brand
           <select
-            className={styles["field-input"]}
+            className={`${styles["field-input"]} ${errors.brand ? styles["field-input-error"] : ""}`}
             value={brand ?? ""}
-            onChange={(e) => setBrand(Number(e.target.value))}
+            onChange={(e) => setBrand(e.target.value ? Number(e.target.value) : undefined)}
           >
+            <option value="">Select a brand</option>
             {BRANDS.map(({ id, name }) => <option key={id} value={id}>{name}</option>)}
           </select>
+          {errors.brand && <span className={styles["field-error"]}>{errors.brand}</span>}
         </label>
         <label className={styles.field}>
           Insight
           <textarea
-            className={styles["field-input"]}
+            className={`${styles["field-input"]} ${errors.text ? styles["field-input-error"] : ""}`}
             rows={5}
             placeholder="Something insightful..."
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
+          {errors.text && <span className={styles["field-error"]}>{errors.text}</span>}
         </label>
         <Button className={styles.submit} type="submit" label="Add insight" />
       </form>
