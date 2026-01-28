@@ -1,5 +1,6 @@
 import React from "react";
 import { Trash2Icon } from "lucide-react";
+import moment from "moment";
 import { DeleteConfirmation } from "../delete-confirmation/delete-confirmation.tsx";
 import { cx } from "../../lib/cx.ts";
 import styles from "./insights.module.css";
@@ -33,7 +34,7 @@ export const Insights = ({ insights, className, onInsightDeleted }: InsightsProp
                   <div className={styles["insight-meta"]}>
                     <span>{getBrandName(brandId)}</span>
                     <div className={styles["insight-meta-details"]}>
-                      <span>{date ? date.toLocaleDateString() : "No date"}</span>
+                      <span>{date ? moment(date).format("MM/DD/YYYY h:mm A") : "No date"}</span>
                       <Trash2Icon
                         className={styles["insight-delete"]}
                         onClick={() => handleDeleteClick(id)}
