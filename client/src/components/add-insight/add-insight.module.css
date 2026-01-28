@@ -26,6 +26,15 @@
   padding: var(--size-4);
 }
 
+.field-input-error {
+  border-color: var(--color-red-500);
+}
+
+.field-error {
+  color: var(--color-red-500);
+  font-size: var(--text-sm);
+}
+
 .submit {
   align-self: flex-end;
 }
