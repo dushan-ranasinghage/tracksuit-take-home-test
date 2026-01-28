@@ -20,5 +20,16 @@ export type Insert = {
   text: string;
 };
 
+export type Delete = {
+  id: number;
+};
+
+export type SelectById = {
+  id: number;
+};
+
 export const insertStatement = (item: Insert) =>
   `INSERT INTO insights (brand, createdAt, text) VALUES (${item.brand}, '${item.createdAt}', '${item.text}')`;
+
+export const deleteStatement = (item: Delete) =>
+  `DELETE FROM insights WHERE id = ${item.id}`;

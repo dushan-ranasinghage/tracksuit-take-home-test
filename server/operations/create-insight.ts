@@ -14,7 +14,11 @@ export default (input: Input): Insight => {
   const createdAt = input.createdAt || new Date();
   const createdAtString = createdAt.toISOString();
 
-  input.db.sql`INSERT INTO insights (brand, createdAt, text) VALUES (${input.brand}, ${createdAtString}, ${input.text})`;
+  input.db.exec(insightsTable.insertStatement({
+    brand: input.brand,
+    createdAt: createdAtString,
+    text: input.text,
+  }));
 
   // Get the last inserted row ID
   const [lastInsertedRow] = input.db.sql<insightsTable.Row>`SELECT * FROM insights WHERE id = last_insert_rowid()`;
