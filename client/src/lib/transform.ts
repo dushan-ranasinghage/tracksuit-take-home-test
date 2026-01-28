@@ -13,13 +13,7 @@ export const transformServerInsight = (serverInsight: ServerInsight): Insight =>
   return {
     ...serverInsight,
     brandId: serverInsight.brand,
-    date: date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    }),
+    date: date,
   };
 };
 
