@@ -19,7 +19,7 @@ export default (input: Input): Insight | undefined => {
     return;
   }
 
-  input.db.exec(`DELETE FROM insights WHERE id = ${input.id}`);
+  input.db.sql`DELETE FROM insights WHERE id = ${input.id}`;
 
   const result: Insight = {
     id: row.id,
